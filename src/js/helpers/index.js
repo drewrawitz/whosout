@@ -3,3 +3,5 @@ export const statuses = [
   { name: 'Working remotely', color: 'blue', emoji: '🏠' },
   { name: 'Vacationing', color: 'green', emoji: '🌴' },
 ];
+
+export const customFields = [{ key: 'dept', field: 'XfB2QXEFQW' }];
