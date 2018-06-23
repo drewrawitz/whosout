@@ -88,7 +88,7 @@ export const renderResults = (data) => {
     </ol>
   `;
 
-  DOMElements.appWrapper.innerHTML = markup;
+  DOMElements.dataContainer.innerHTML = markup;
 };
 
 export default renderResults;

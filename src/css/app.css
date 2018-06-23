@@ -1,16 +1,20 @@
-.c-application {
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.c-data-container {
   opacity: 1;
   transition: opacity 1s ease-in-out;
 
   &.is-loading {
     opacity: 0;
   }
-}
-
-svg {
-  fill: none;
-  height: 1em;
-  width: 1em;
 }
 
 .c-alert {
@@ -37,5 +41,24 @@ svg {
 
   &--error {
     background-color: var(--alert-color-error);
+  }
+}
+
+.c-refresh {
+  --refresh-color: #8a8a8a;
+  --refresh-color-hover: #676767;
+  color: var(--refresh-color);
+  position: absolute;
+  right: 0.5em;
+  top: 0.5em;
+  transition: color 0.3s ease-in-out;
+  z-index: 100;
+
+  &.is-loading {
+    animation: rotating 2s linear infinite;
+  }
+
+  &:hover {
+    color: var(--refresh-color-hover);
   }
 }

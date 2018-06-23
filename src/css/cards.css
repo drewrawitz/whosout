@@ -1,10 +1,10 @@
 body {
+  background-color: #dfe4ea;
   font-size: calc(6px + (24 - 6) * (100vmin - 320px) / (2200 - 320));
 }
 
 .cards {
   --card-gap: 2em;
-  background-color: #dfe4ea;
   display: grid;
   grid-gap: var(--card-gap);
   height: 100vh;

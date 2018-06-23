@@ -34,7 +34,7 @@ const filter = dept || '';
  */
 const MemberController = async () => {
   state.members = new Members(filter);
-  addLoadingClass(DOMElements.appWrapper);
+  addLoadingClass(DOMElements.dataContainer);
 
   try {
     // Slack API call to get members
@@ -46,7 +46,7 @@ const MemberController = async () => {
       await state.members.filterResults();
     }
 
-    removeLoadingClass(DOMElements.appWrapper);
+    removeLoadingClass(DOMElements.dataContainer);
 
     // Render the results to the UI
     cardView.renderResults(state.members.currentData);
@@ -55,6 +55,29 @@ const MemberController = async () => {
     console.log('Something wrong...', err);
   }
 };
+
+/**
+ * Event Listeners
+ */
+const refreshApplication = async () => {
+  const icon = DOMElements.refreshIcon;
+
+  // Make the refresh icon spin
+  addLoadingClass(icon);
+
+  // Clear the local storage
+  if (filter) {
+    localStorage.removeItem(filter);
+  }
+
+  // Load the controller
+  await MemberController(filter);
+
+  // Done loading
+  removeLoadingClass(icon);
+};
+
+DOMElements.refreshIcon.addEventListener('click', refreshApplication);
 
 /**
  * Check if API Key has been set
@@ -68,7 +91,7 @@ if (API_TOKEN) {
   /**
    * Refresh the data every x seconds (see helpers.js for the refresh time const)
    */
-  setInterval(() => MemberController(filter), REFRESH_TIME);
+  setInterval(() => refreshApplication(), REFRESH_TIME);
 } else {
   alertView.displayAlert('Please enter your Slack API Token in the config.js file.', 'error');
 }

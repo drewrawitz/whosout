@@ -12,7 +12,9 @@ export const customFields = {
 
 export const DOMElements = {
   appWrapper: document.getElementById('js-app-container'),
+  dataContainer: document.getElementById('js-data-container'),
   cardsWrapper: document.querySelector('.js-cards-wrapper'),
+  refreshIcon: document.querySelector('.js-refresh-app'),
 };
 
 export const addLoadingClass = (el) => {
