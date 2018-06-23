@@ -1,14 +1,14 @@
 import '../css/index.css';
-import Slack from './models/Slack';
+import Members from './models/Members';
 import * as cardView from './views/cardView';
 
 const state = {};
 
 /**
- * Slack Controller
+ * Member Controller
  */
-const controlSlack = async () => {
-  state.members = new Slack();
+const MemberController = async () => {
+  state.members = new Members();
 
   try {
     // Slack API call to get members
@@ -17,11 +17,11 @@ const controlSlack = async () => {
     // Store the data
     const { data, count } = state.members;
 
-    // Render the wrapper
-    cardView.renderWrapper(count, data);
+    // Render the results to the UI
+    cardView.renderResults(count, data);
   } catch (err) {
     console.log('Something wrong...', err);
   }
 };
 
-controlSlack();
+MemberController();

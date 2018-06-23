@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { token } from '../config';
 
-export default class Slack {
+export default class Members {
   async getMembers() {
     try {
       const res = await axios(
