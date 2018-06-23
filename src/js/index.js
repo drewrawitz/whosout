@@ -91,7 +91,7 @@ if (API_TOKEN) {
   /**
    * Refresh the data every x seconds (see helpers.js for the refresh time const)
    */
-  setInterval(() => refreshApplication(), REFRESH_TIME);
+  setInterval(() => MemberController(filter), REFRESH_TIME);
 } else {
   alertView.displayAlert('Please enter your Slack API Token in the config.js file.', 'error');
 }
