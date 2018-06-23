@@ -31,15 +31,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-        ],
+        use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
       {
-        test: /\.(woff(2)?|ttf|eot|otf|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.svg$/,
+        loader: 'svg-inline-loader',
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|otf)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
             loader: 'file-loader',
