@@ -42,19 +42,22 @@ const renderCard = (cards) => {
   const list = [];
 
   cards.forEach((card) => {
-    const memberTitle = card.profile.title ? `<p class="member__title">${card.profile.title}` : '';
+    const { profile, real_name: realName } = card;
+    const { title, image_512: image, status_text: statusText } = profile;
+
+    const memberTitle = title ? `<p class="member__title">${title}` : '';
     const markup = `
       <li class="card ${renderCardClasses(card)}">
         <section class="card__content">
           <div class="member">
             <img
               class="member__image"
-              alt=${card.real_name}
-              src=${card.profile.image_512}
+              alt=${realName}
+              src=${image}
             />
-            ${renderCardStatus(card.profile.status_text)}
+            ${renderCardStatus(statusText)}
             <div class="member__body">
-              <h2 class="member__name">${card.real_name}</h2>
+              <h2 class="member__name">${realName}</h2>
               ${memberTitle}
             </div>
           </div>
