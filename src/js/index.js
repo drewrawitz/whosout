@@ -5,9 +5,31 @@ import * as cardView from './views/cardView';
 const state = {};
 
 /**
+ * Get Query Variables
+ */
+const getQueryVariable = (variable) => {
+  const query = window.location.search.substring(1);
+  const vars = query.split('&');
+
+  for (let i = 0; i < vars.length; i += 1) {
+    const pair = vars[i].split('=');
+    if (pair[0] === variable) {
+      return unescape(pair[1]);
+    }
+  }
+  return false;
+};
+
+/**
+ * Check if filtering by department
+ */
+const dept = getQueryVariable('dept');
+const filter = (dept) || '';
+
+/**
  * Member Controller
  */
-const MemberController = async (filter) => {
+const MemberController = async () => {
   state.members = new Members(filter);
 
   try {
@@ -28,26 +50,6 @@ const MemberController = async (filter) => {
 };
 
 /**
- * Get Query Variables
+ * Initialize our controller
  */
-const getQueryVariable = (variable) => {
-  const query = window.location.search.substring(1);
-  const vars = query.split('&');
-
-  for (let i = 0; i < vars.length; i += 1) {
-    const pair = vars[i].split('=');
-    if (pair[0] === variable) {
-      return unescape(pair[1]);
-    }
-  }
-  return false;
-};
-
-const dept = getQueryVariable('dept');
-let filter = '';
-
-if (dept) {
-  filter = dept;
-}
-
 MemberController(filter);
