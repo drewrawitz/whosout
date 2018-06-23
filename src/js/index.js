@@ -24,7 +24,7 @@ const getQueryVariable = (variable) => {
  * Check if filtering by department
  */
 const dept = getQueryVariable('dept');
-const filter = (dept) || '';
+const filter = dept || '';
 
 /**
  * Member Controller
@@ -45,6 +45,7 @@ const MemberController = async () => {
     // Render the results to the UI
     cardView.renderResults(state.members.currentData);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.log('Something wrong...', err);
   }
 };

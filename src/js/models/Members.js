@@ -12,6 +12,7 @@ export default class Members {
   }
 
   async filterResults() {
+    // eslint-disable-next-line max-len
     const filtered = this.allMembers.filter(member => this.filteredMembers.find(email => member.profile.email === email));
 
     this.currentData = filtered;
@@ -21,9 +22,7 @@ export default class Members {
     const key = customFields.dept;
 
     this.allMembers.forEach((user) => {
-      const url = `https://slack.com/api/users.profile.get?token=${API_TOKEN}&user=${
-        user.id
-      }`;
+      const url = `https://slack.com/api/users.profile.get?token=${API_TOKEN}&user=${user.id}`;
       this.promises.push(axios.get(url));
     });
 
@@ -50,9 +49,7 @@ export default class Members {
 
   async getAllMembers() {
     try {
-      const res = await axios(
-        `https://slack.com/api/users.list?token=${API_TOKEN}&presence=true`,
-      );
+      const res = await axios(`https://slack.com/api/users.list?token=${API_TOKEN}&presence=true`);
       const { members } = res.data;
 
       const allMembers = members.filter(
@@ -66,6 +63,7 @@ export default class Members {
       this.allMembers = allMembers;
       this.currentData = allMembers;
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(`Something went wrong: ${error}`);
     }
   }

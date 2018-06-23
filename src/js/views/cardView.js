@@ -1,12 +1,12 @@
-import { elements } from './base';
-import { statuses } from '../helpers';
+import { statuses, DOMElements } from '../helpers';
 
-export const getStatusValue = (name, prop) => {
-  let obj;
-  return (obj = statuses.find(status => status.name === name)) ? obj[prop] : '';
+const getStatusValue = (name, prop) => {
+  const obj = statuses.find(status => status.name === name);
+
+  return obj && obj[prop] ? obj[prop] : '';
 };
 
-export const renderCardClasses = (card) => {
+const renderCardClasses = (card) => {
   const classes = [];
   const onlineStatus = card.presence === 'active' ? 'card--online-online' : 'card--online-offline';
 
@@ -22,7 +22,7 @@ export const renderCardClasses = (card) => {
   return classes.join(' ');
 };
 
-export const renderCardStatus = (status) => {
+const renderCardStatus = (status) => {
   let statusMarkup = '';
 
   if (getStatusValue(status, 'name')) {
@@ -38,13 +38,11 @@ export const renderCardStatus = (status) => {
   return statusMarkup;
 };
 
-export const renderCard = (cards) => {
+const renderCard = (cards) => {
   const list = [];
 
   cards.forEach((card) => {
-    const memberTitle = card.profile.title
-      ? `<p class="member__title">${card.profile.title}`
-      : '';
+    const memberTitle = card.profile.title ? `<p class="member__title">${card.profile.title}` : '';
     const markup = `
       <li class="card ${renderCardClasses(card)}">
         <section class="card__content">
@@ -87,5 +85,7 @@ export const renderResults = (data) => {
     </ol>
   `;
 
-  elements.appWrapper.innerHTML = markup;
+  DOMElements.appWrapper.innerHTML = markup;
 };
+
+export default renderResults;
