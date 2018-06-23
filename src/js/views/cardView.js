@@ -1,5 +1,9 @@
-import { elements } from './base';
-import { statuses } from '../helpers';
+import {
+  elements,
+} from './base';
+import {
+  statuses,
+} from '../helpers';
 
 export const getStatusValue = (name, prop) => {
   let obj;
@@ -69,8 +73,9 @@ export const renderCard = (cards) => {
   return list.join('');
 };
 
-export const renderResults = (count, data) => {
+export const renderResults = (data) => {
   let layout;
+  const count = data.length;
   const lengths = [4, 9, 12, 16, 20, 25, 30, 36, 42, 49, 56, 64, 72, 81];
 
   for (let i = 0; i < lengths.length; i += 1) {

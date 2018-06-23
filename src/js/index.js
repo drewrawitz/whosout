@@ -8,17 +8,20 @@ const state = {};
  * Member Controller
  */
 const MemberController = async (filter) => {
-  state.members = new Members();
+  state.members = new Members(filter);
 
   try {
     // Slack API call to get members
-    await state.members.getMembers(filter);
+    await state.members.getAllMembers();
 
-    // Store the data
-    const { data, count } = state.members;
+    // If there's a filter, run the necessary functions
+    if (filter) {
+      await state.members.generateMembersForDepartments();
+      await state.members.filterResults();
+    }
 
     // Render the results to the UI
-    cardView.renderResults(count, data);
+    cardView.renderResults(state.members.currentData);
   } catch (err) {
     console.log('Something wrong...', err);
   }

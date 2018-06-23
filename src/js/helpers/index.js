@@ -4,4 +4,6 @@ export const statuses = [
   { name: 'Vacationing', color: 'green', emoji: '🌴' },
 ];
 
-export const customFields = [{ key: 'dept', field: 'XfB2QXEFQW' }];
+export const customFields = {
+  dept: 'XfB2QXEFQW',
+};
