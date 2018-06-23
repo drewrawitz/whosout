@@ -73,11 +73,12 @@ export const renderResults = (count, data) => {
   let layout;
   const lengths = [4, 9, 12, 16, 20, 25, 30, 36, 42, 49, 56, 64, 72, 81];
 
-  lengths.forEach((length) => {
-    if (count <= length) {
-      layout = `cards--layout-max-${length}`;
+  for (let i = 0; i < lengths.length; i += 1) {
+    if (count <= lengths[i]) {
+      layout = `cards--layout-max-${lengths[i]}`;
+      break;
     }
-  });
+  }
 
   const markup = `
     <ol class="js-cards-wrapper cards ${layout}">
