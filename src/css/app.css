@@ -1,0 +1,8 @@
+.c-application {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+
+  &.is-loading {
+    opacity: 0;
+  }
+}

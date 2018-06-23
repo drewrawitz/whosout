@@ -1,3 +1,5 @@
+export const LOADING_CLASS = 'is-loading';
+
 export const statuses = [
   { name: 'In a meeting', color: 'maroon', emoji: '🗓' },
   { name: 'Working remotely', color: 'blue', emoji: '🏠' },
@@ -11,4 +13,12 @@ export const customFields = {
 export const DOMElements = {
   appWrapper: document.getElementById('js-app-container'),
   cardsWrapper: document.querySelector('.js-cards-wrapper'),
+};
+
+export const addLoadingClass = (el) => {
+  el.classList.add(LOADING_CLASS);
+};
+
+export const removeLoadingClass = (el) => {
+  el.classList.remove(LOADING_CLASS);
 };

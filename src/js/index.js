@@ -1,6 +1,7 @@
 import '../css/index.css';
 import Members from './models/Members';
 import * as cardView from './views/cardView';
+import { DOMElements, addLoadingClass, removeLoadingClass } from './helpers';
 
 const state = {};
 
@@ -31,6 +32,7 @@ const filter = dept || '';
  */
 const MemberController = async () => {
   state.members = new Members(filter);
+  addLoadingClass(DOMElements.appWrapper);
 
   try {
     // Slack API call to get members
@@ -41,6 +43,8 @@ const MemberController = async () => {
       await state.members.generateMembersForDepartments();
       await state.members.filterResults();
     }
+
+    removeLoadingClass(DOMElements.appWrapper);
 
     // Render the results to the UI
     cardView.renderResults(state.members.currentData);
