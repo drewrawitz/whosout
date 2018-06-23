@@ -7,16 +7,33 @@
   }
 }
 
+svg {
+  fill: none;
+  height: 1em;
+  width: 1em;
+}
+
 .c-alert {
   --alert-gap: 1.5em;
   --alert-color-default: #549fe0;
   --alert-color-error: #f13e3e;
+  align-items: center;
   background-color: var(--alert-color-default);
   border-radius: 0.15em;
   color: #fff;
+  display: flex;
+  justify-content: center;
   margin: var(--alert-gap);
   padding: var(--alert-gap);
-  text-align: center;
+
+  > *:not(:last-child) {
+    margin-right: 0.5em;
+  }
+
+  svg {
+    height: 1.5em;
+    width: 1.5em;
+  }
 
   &--error {
     background-color: var(--alert-color-error);

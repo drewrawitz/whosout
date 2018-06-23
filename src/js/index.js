@@ -1,10 +1,9 @@
 import '../css/index.css';
 import Members from './models/Members';
-import * as cardView from './views/cardView';
-import {
-  DOMElements, addLoadingClass, removeLoadingClass, displayAlert,
-} from './helpers';
 import { API_TOKEN, REFRESH_TIME } from './config';
+import { DOMElements, addLoadingClass, removeLoadingClass } from './helpers';
+import * as cardView from './views/cardView';
+import * as alertView from './views/alertView';
 
 const state = {};
 
@@ -71,5 +70,5 @@ if (API_TOKEN) {
    */
   setInterval(() => MemberController(filter), REFRESH_TIME);
 } else {
-  displayAlert('Please enter your Slack API Token in the config.js file.', 'error');
+  alertView.displayAlert('Please enter your Slack API Token in the config.js file.', 'error');
 }
