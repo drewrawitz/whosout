@@ -1,8 +1,10 @@
 import '../css/index.css';
 import Members from './models/Members';
 import * as cardView from './views/cardView';
-import { DOMElements, addLoadingClass, removeLoadingClass } from './helpers';
-import { REFRESH_TIME } from './config';
+import {
+  DOMElements, addLoadingClass, removeLoadingClass, displayAlert,
+} from './helpers';
+import { API_TOKEN, REFRESH_TIME } from './config';
 
 const state = {};
 
@@ -56,11 +58,18 @@ const MemberController = async () => {
 };
 
 /**
- * Initialize our controller
+ * Check if API Key has been set
  */
-MemberController(filter);
+if (API_TOKEN) {
+  /**
+   * Initialize our controller
+   */
+  MemberController(filter);
 
-/**
- * Refresh the data every x seconds (see helpers.js for the refresh time const)
- */
-setInterval(() => MemberController(filter), REFRESH_TIME);
+  /**
+   * Refresh the data every x seconds (see helpers.js for the refresh time const)
+   */
+  setInterval(() => MemberController(filter), REFRESH_TIME);
+} else {
+  displayAlert('Please enter your Slack API Token in the config.js file.', 'error');
+}

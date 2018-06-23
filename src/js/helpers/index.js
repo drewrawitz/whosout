@@ -22,3 +22,13 @@ export const addLoadingClass = (el) => {
 export const removeLoadingClass = (el) => {
   el.classList.remove(LOADING_CLASS);
 };
+
+export const displayAlert = (msg, type) => {
+  const modifierClass = `c-alert--${type}` || '';
+
+  const markup = `
+    <div class="c-alert ${modifierClass}">${msg}</div>
+  `;
+
+  DOMElements.appWrapper.innerHTML = markup;
+};

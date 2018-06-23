@@ -6,3 +6,19 @@
     opacity: 0;
   }
 }
+
+.c-alert {
+  --alert-gap: 1.5em;
+  --alert-color-default: #549fe0;
+  --alert-color-error: #f13e3e;
+  background-color: var(--alert-color-default);
+  border-radius: 0.15em;
+  color: #fff;
+  margin: var(--alert-gap);
+  padding: var(--alert-gap);
+  text-align: center;
+
+  &--error {
+    background-color: var(--alert-color-error);
+  }
+}
