@@ -21,10 +21,16 @@ export default class Members {
   async generateMembersForDepartments() {
     const key = customFields.dept;
 
-    this.allMembers.forEach((user) => {
-      const url = `https://slack.com/api/users.profile.get?token=${API_TOKEN}&user=${user.id}`;
-      this.promises.push(axios.get(url));
-    });
+    // If this does not exist in Local Storage, let's fetch it from the API
+    if (!localStorage.getItem(this.filter)) {
+      this.allMembers.forEach((user) => {
+        const url = `https://slack.com/api/users.profile.get?token=${API_TOKEN}&user=${user.id}`;
+        this.promises.push(axios.get(url));
+      });
+    } else {
+      // Already exists, let's use what we have stored
+      this.filteredMembers = JSON.parse(localStorage.getItem(this.filter));
+    }
 
     await axios
       .all(this.promises)
@@ -44,6 +50,11 @@ export default class Members {
       .then(() => {
         // clear out the promises
         this.promises = [];
+
+        // If this doesn't exist in local storage, let's add it
+        if (!localStorage.getItem(this.filter)) {
+          localStorage.setItem(this.filter, JSON.stringify(this.filteredMembers));
+        }
       });
   }
 
