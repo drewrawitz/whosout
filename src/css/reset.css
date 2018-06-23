@@ -1,0 +1,106 @@
+/* ==========================================================================
+ * Reset
+ * ========================================================================== */
+
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+*,
+::before,
+::after {
+  background-repeat: no-repeat;
+  box-sizing: inherit;
+}
+
+*:focus {
+  outline: none;
+}
+
+/* stylelint-disable-next-line */
+#root,
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+html {
+  box-sizing: border-box;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: "Tofino-Bold", -apple-system, "BlinkMacSystemFont", "Segoe UI",
+    "Helvetica", "Arial", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-decoration-skip: ink;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  border-radius: 0;
+}
+
+button,
+input,
+optgroup,
+select,
+table,
+textarea {
+  appearance: none;
+  background-color: transparent;
+  border-radius: 0;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+[type="number"],
+[type="search"] {
+  appearance: textfield;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-search-cancel-button,
+input::-webkit-search-decoration {
+  appearance: none;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img,
+svg {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+svg {
+  fill: currentColor;
+}
+
+a {
+  text-decoration: none;
+}
+
+:any-link {
+  cursor: pointer;
+}

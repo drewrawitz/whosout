@@ -1,0 +1,12 @@
+/* ==========================================================================
+ * Fonts
+ * ========================================================================== */
+
+@font-face {
+  font-family: "Tofino-Bold";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/Tofino-Bold.woff2") format("woff2"),
+    url("../fonts/Tofino-Bold.woff") format("woff"),
+    url("../fonts/Tofino-Bold.otf") format("opentype");
+}
