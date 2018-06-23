@@ -1,10 +1,6 @@
 import axios from 'axios';
-import {
-  token,
-} from '../config';
-import {
-  customFields,
-} from '../helpers';
+import { API_TOKEN } from '../config';
+import { customFields } from '../helpers';
 
 export default class Members {
   constructor(filter) {
@@ -25,43 +21,46 @@ export default class Members {
     const key = customFields.dept;
 
     this.allMembers.forEach((user) => {
-      const url = `https://slack.com/api/users.profile.get?token=${token}&user=${user.id}`;
+      const url = `https://slack.com/api/users.profile.get?token=${API_TOKEN}&user=${
+        user.id
+      }`;
       this.promises.push(axios.get(url));
     });
 
-    await axios.all(this.promises).then((results) => {
-      results.forEach((res) => {
-        if (
-          res.data.ok
-          && res.data.profile
-          && res.data.profile.fields
-          && res.data.profile.fields[key]
-          && res.data.profile.fields[key].value === this.filter
-        ) {
-          this.filteredMembers.push(res.data.profile.email);
-        }
+    await axios
+      .all(this.promises)
+      .then((results) => {
+        results.forEach((res) => {
+          if (
+            res.data.ok
+            && res.data.profile
+            && res.data.profile.fields
+            && res.data.profile.fields[key]
+            && res.data.profile.fields[key].value === this.filter
+          ) {
+            this.filteredMembers.push(res.data.profile.email);
+          }
+        });
+      })
+      .then(() => {
+        // clear out the promises
+        this.promises = [];
       });
-    }).then(() => {
-      // clear out the promises
-      this.promises = [];
-    });
   }
 
   async getAllMembers() {
     try {
       const res = await axios(
-        `https://slack.com/api/users.list?token=${token}&presence=true`,
+        `https://slack.com/api/users.list?token=${API_TOKEN}&presence=true`,
       );
-      const {
-        members,
-      } = res.data;
+      const { members } = res.data;
 
       const allMembers = members.filter(
         item => !item.deleted
-        && !item.is_bot
-        && !item.is_restricted
-        && item.name !== 'slackbot'
-        && item.name !== 'subscriptions',
+          && !item.is_bot
+          && !item.is_restricted
+          && item.name !== 'slackbot'
+          && item.name !== 'subscriptions',
       );
 
       this.allMembers = allMembers;

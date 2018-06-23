@@ -1,9 +1,5 @@
-import {
-  elements,
-} from './base';
-import {
-  statuses,
-} from '../helpers';
+import { elements } from './base';
+import { statuses } from '../helpers';
 
 export const getStatusValue = (name, prop) => {
   let obj;
