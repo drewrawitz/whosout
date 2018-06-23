@@ -2,6 +2,7 @@ import '../css/index.css';
 import Members from './models/Members';
 import * as cardView from './views/cardView';
 import { DOMElements, addLoadingClass, removeLoadingClass } from './helpers';
+import { REFRESH_TIME } from './config';
 
 const state = {};
 
@@ -58,3 +59,8 @@ const MemberController = async () => {
  * Initialize our controller
  */
 MemberController(filter);
+
+/**
+ * Refresh the data every x seconds (see helpers.js for the refresh time const)
+ */
+setInterval(() => MemberController(filter), REFRESH_TIME);

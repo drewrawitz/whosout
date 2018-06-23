@@ -1,7 +1,7 @@
 export const LOADING_CLASS = 'is-loading';
 
 export const statuses = [
-  { name: 'In a meeting', color: 'maroon', emoji: '🗓' },
+  { name: 'In a meeting', color: 'red', emoji: '🗓' },
   { name: 'Working remotely', color: 'blue', emoji: '🏠' },
   { name: 'Vacationing', color: 'green', emoji: '🌴' },
 ];
