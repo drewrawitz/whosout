@@ -51,8 +51,8 @@ export default class Members {
         // clear out the promises
         this.promises = [];
 
-        // If this doesn't exist in local storage, let's add it
-        if (!localStorage.getItem(this.filter)) {
+        // If this doesn't exist in local storage, let's add it (if there's data)
+        if (!localStorage.getItem(this.filter) && this.filteredMembers.length > 0) {
           localStorage.setItem(this.filter, JSON.stringify(this.filteredMembers));
         }
       });
