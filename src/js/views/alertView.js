@@ -1,8 +1,11 @@
+// @flow
 import IconAlertTriangle from '../../svg/alert-triangle.svg';
 import IconAlertCircle from '../../svg/alert-circle.svg';
-import { DOMElements } from '../helpers';
+import {
+  DOMElements,
+} from '../helpers';
 
-export const displayAlert = (msg, type) => {
+export const displayAlert = (msg: string, type: string) => {
   const modifierClass = `c-alert--${type}` || '';
   let icon;
 

@@ -1,4 +1,8 @@
-import { statuses, DOMElements } from '../helpers';
+// @flow
+import {
+  statuses,
+  DOMElements,
+} from '../helpers';
 
 const getStatusValue = (name, prop) => {
   const obj = statuses.find(status => status.name === name);
@@ -42,8 +46,15 @@ const renderCard = (cards) => {
   const list = [];
 
   cards.forEach((card) => {
-    const { profile, real_name: realName } = card;
-    const { title, image_512: image, status_text: statusText } = profile;
+    const {
+      profile,
+      real_name: realName,
+    } = card;
+    const {
+      title,
+      image_512: image,
+      status_text: statusText,
+    } = profile;
 
     const memberTitle = title ? `<p class="member__title">${title}` : '';
     const markup = `
@@ -70,10 +81,10 @@ const renderCard = (cards) => {
   return list.join('');
 };
 
-export const renderResults = (data) => {
-  let layout;
-  const count = data.length;
-  const lengths = [4, 9, 12, 16, 20, 25, 30, 36, 42, 49, 56, 64, 72, 81];
+export const renderResults = (data: Array < Object >) => {
+  let layout: string = '';
+  const count: number = data.length;
+  const lengths: Array < number > = [4, 9, 12, 16, 20, 25, 30, 36, 42, 49, 56, 64, 72, 81];
 
   for (let i = 0; i < lengths.length; i += 1) {
     if (count <= lengths[i]) {

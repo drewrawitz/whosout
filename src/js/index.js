@@ -1,7 +1,15 @@
+// @flow
 import '../css/index.css';
 import Members from './models/Members';
-import { API_TOKEN, REFRESH_TIME } from './config';
-import { DOMElements, addLoadingClass, removeLoadingClass } from './helpers';
+import {
+  API_TOKEN,
+  REFRESH_TIME,
+} from './config';
+import {
+  DOMElements,
+  addLoadingClass,
+  removeLoadingClass,
+} from './helpers';
 import * as cardView from './views/cardView';
 import * as alertView from './views/alertView';
 
@@ -27,12 +35,12 @@ const getQueryVariable = (variable) => {
  * Check if filtering by department
  */
 const dept = getQueryVariable('dept');
-const filter = dept || '';
+const filterStr = dept || '';
 
 /**
  * Member Controller
  */
-const MemberController = async () => {
+const MemberController = async (filter: string) => {
   state.members = new Members(filter);
   addLoadingClass(DOMElements.dataContainer);
 
@@ -66,12 +74,12 @@ const refreshApplication = async () => {
   addLoadingClass(icon);
 
   // Clear the local storage
-  if (filter) {
-    localStorage.removeItem(filter);
+  if (filterStr) {
+    localStorage.removeItem(filterStr);
   }
 
   // Load the controller
-  await MemberController(filter);
+  await MemberController(filterStr);
 
   // Done loading
   removeLoadingClass(icon);
@@ -86,12 +94,12 @@ if (API_TOKEN) {
   /**
    * Initialize our controller
    */
-  MemberController(filter);
+  MemberController(filterStr);
 
   /**
    * Refresh the data every x seconds (see helpers.js for the refresh time const)
    */
-  setInterval(() => MemberController(filter), REFRESH_TIME);
+  setInterval(() => MemberController(filterStr), REFRESH_TIME);
 } else {
   alertView.displayAlert('Please enter your Slack API Token in the config.js file.', 'error');
 }

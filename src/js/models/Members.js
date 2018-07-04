@@ -1,9 +1,24 @@
+// @flow
 import axios from 'axios';
-import { API_TOKEN } from '../config';
-import { customFields } from '../helpers';
+import {
+  API_TOKEN,
+} from '../config';
+import {
+  customFields,
+} from '../helpers';
 
 export default class Members {
-  constructor(filter) {
+  filter: string;
+
+  allMembers: Array < Object > ;
+
+  filteredMembers: Array < Object > ;
+
+  currentData: Array < Object > ;
+
+  promises: Array < Object > ;
+
+  constructor(filter: string) {
     this.filter = filter;
     this.allMembers = [];
     this.filteredMembers = [];
@@ -29,7 +44,8 @@ export default class Members {
       });
     } else {
       // Already exists, let's use what we have stored
-      this.filteredMembers = JSON.parse(localStorage.getItem(this.filter));
+      const storedData = global.localStorage.getItem(this.filter);
+      this.filteredMembers = JSON.parse(storedData);
     }
 
     await axios
@@ -61,14 +77,16 @@ export default class Members {
   async getAllMembers() {
     try {
       const res = await axios(`https://slack.com/api/users.list?token=${API_TOKEN}&presence=true`);
-      const { members } = res.data;
+      const {
+        members,
+      } = res.data;
 
       const allMembers = members.filter(
         item => !item.deleted
-          && !item.is_bot
-          && !item.is_restricted
-          && item.name !== 'slackbot'
-          && item.name !== 'subscriptions',
+        && !item.is_bot
+        && !item.is_restricted
+        && item.name !== 'slackbot'
+        && item.name !== 'subscriptions',
       );
 
       this.allMembers = allMembers;
